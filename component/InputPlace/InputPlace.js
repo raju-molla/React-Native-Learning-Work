@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 
+import myImage from "../../assets/images/test.jpeg";
+
 const InputPlace = (props) => {
   return (
     <View style={styles.inputView}>
@@ -21,8 +23,13 @@ const InputPlace = (props) => {
           if (props.inputValue != "") {
             props.setPlaseList([
               ...props.pleaseList,
-              { key: Math.random().toString(), value: props.inputValue },
+              {
+                key: Math.random().toString(),
+                value: props.inputValue,
+                image: myImage,
+              },
             ]);
+            props.setInputValue("");
           }
         }}
       />
