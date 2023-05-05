@@ -9,7 +9,9 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
+import InputPlace from "./component/InputPlace/InputPlace";
 import ListItem from "./component/ListItem/ListItem";
+import PlaceList from "./component/PlaceList/PlaceList";
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
@@ -17,44 +19,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputView}>
-        <TextInput
-          style={{
-            width: "80%",
-            borderBottomWidth: 1,
-            borderColor: "green",
-            padding: 7,
-          }}
-          placeholder="add a please"
-          value={inputValue}
-          onChangeText={(text) => setInputValue(text)}
-        />
-        <Button
-          title="Add"
-          onPress={() => {
-            if (inputValue != "") {
-              setPlaseList([
-                ...pleaseList,
-                { key: Math.random().toString(), value: inputValue },
-              ]);
-            }
-          }}
-        />
-      </View>
-      <FlatList
-        style={{
-          width: "100%",
-        }}
-        data={pleaseList}
-        renderItem={(info) => {
-          return (
-            <ListItem
-              placeName={info.item.value}
-              onItemPressed={() => alert(info.item.value)}
-            />
-          );
-        }}
+      <InputPlace
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        pleaseList={pleaseList}
+        setPlaseList={setPlaseList}
       />
+      <PlaceList pleaseList={pleaseList} />
 
       <StatusBar style="auto" />
     </View>
@@ -68,13 +39,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "column",
-  },
-  inputView: {
-    padding: 20,
-    width: "100%",
-    marginTop: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
 });
