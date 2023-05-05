@@ -7,17 +7,14 @@ import {
   TextInput,
   Button,
   ScrollView,
+  FlatList,
 } from "react-native";
 import ListItem from "./component/ListItem/ListItem";
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
   const [pleaseList, setPlaseList] = useState([]);
-  const list = pleaseList.map((ele, id) => {
-    return (
-      <ListItem placeName={ele} key={id} onItemPressed={() => alert(ele)} />
-    );
-  });
+
   return (
     <View style={styles.container}>
       <View style={styles.inputView}>
@@ -36,18 +33,28 @@ export default function App() {
           title="Add"
           onPress={() => {
             if (inputValue != "") {
-              setPlaseList([...pleaseList, inputValue]);
+              setPlaseList([
+                ...pleaseList,
+                { key: Math.random().toString(), value: inputValue },
+              ]);
             }
           }}
         />
       </View>
-      <ScrollView
+      <FlatList
         style={{
           width: "100%",
         }}
-      >
-        {list}
-      </ScrollView>
+        data={pleaseList}
+        renderItem={(info) => {
+          return (
+            <ListItem
+              placeName={info.item.value}
+              onItemPressed={() => alert(info.item.value)}
+            />
+          );
+        }}
+      />
 
       <StatusBar style="auto" />
     </View>
