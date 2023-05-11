@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 
-import myImage from "../../assets/images/test.jpeg";
+import myImage from "../../../assets/images/test.jpeg";
+import CustomButton from "../Button/CustomButtom";
 
 const InputPlace = (props) => {
   return (
@@ -17,18 +18,17 @@ const InputPlace = (props) => {
         value={props.inputValue}
         onChangeText={(text) => props.setInputValue(text)}
       />
-      <Button
+
+      <CustomButton
+        color="green"
         title="Add"
         onPress={() => {
           if (props.inputValue != "") {
-            props.setPlaseList([
-              ...props.pleaseList,
-              {
-                key: Math.random().toString(),
-                value: props.inputValue,
-                image: myImage,
-              },
-            ]);
+            props.addPlace({
+              key: Math.random().toString(),
+              value: props.inputValue,
+              image: myImage,
+            });
             props.setInputValue("");
           }
         }}
