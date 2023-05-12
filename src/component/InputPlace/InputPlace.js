@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   inputView: {
     padding: 20,
     width: "100%",
-    marginTop: 50,
+
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

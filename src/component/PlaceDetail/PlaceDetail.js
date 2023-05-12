@@ -7,7 +7,10 @@ import {
   Button,
   Platform,
   StyleSheet,
+  Touchable,
+  TouchableOpacity,
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import CustomButton from "../Button/CustomButtom";
 
 const PlaceDetail = (props) => {
@@ -30,24 +33,40 @@ const PlaceDetail = (props) => {
           {props.place.value}
         </Text>
         <View>
-          <CustomButton
-            title="Delete"
-            color="red"
+          <TouchableOpacity
+            style={styles.delete}
             onPress={() => {
               props.handleDeleteItem(props.place.key);
             }}
-          />
-          <CustomButton
+          >
+            <Icon name="trash" size={60} color="red" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.close}
             onPress={() => {
               props.handleHideModel();
             }}
-            title="close"
-            color="green"
-          />
+          >
+            <Icon name="close" size={60} color="green" />
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  delete: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    width: "100%",
+    // backgroundColor: "red",
+  },
+  close: {
+    alignItems: "center",
+  },
+});
 
 export default PlaceDetail;
